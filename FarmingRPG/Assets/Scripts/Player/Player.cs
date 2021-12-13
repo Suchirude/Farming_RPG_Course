@@ -31,7 +31,7 @@ public class Player : SingletonMonobehaviour<Player>
     bool idleRight;
     ToolEffect toolEffect = ToolEffect.none;
 
-    private Rigidbody2D rigidBody;
+    private Rigidbody2D rigidBody2D;
 
     private Direction playerDirection;
 
@@ -45,7 +45,7 @@ public class Player : SingletonMonobehaviour<Player>
     {
         base.Awake();
 
-        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -56,7 +56,30 @@ public class Player : SingletonMonobehaviour<Player>
 
         PlayerMovementInput();
 
+        PlayerWalkInput();
+
+        //Send event to any listeners for player movement input
+        EventHandler.CallMovementEvent(xInput, yInput,
+                isWalking, isRunning, isIdle, isCarrying, toolEffect,
+                isUsingToolRight, isUsingToolLeft, isUsingToolUp, isUsingToolDown,
+                isLiftingToolRight, isLiftingToolLeft, isLiftingToolUp, isLiftingToolDown,
+                isPickingRight, isPickingLeft, isPickingUp, isPickingDown,
+                isSwingingToolRight, isSwingingToolLeft, isSwingingToolUp, isSwingingToolDown,
+                false, false, false, false);
+
         #endregion
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMovement();
+    }
+
+    private void PlayerMovement()
+    {
+        Vector2 move = new Vector2(xInput * movementSpeed * Time.deltaTime, yInput * movementSpeed * Time.deltaTime);
+
+        rigidBody2D.MovePosition(rigidBody2D.position + move);
     }
 
     private void ResetAnimationTriggers()
@@ -82,7 +105,63 @@ public class Player : SingletonMonobehaviour<Player>
 
     private void PlayerMovementInput()
     {
-        xInput = Input.GetAxisRaw("Horizontal");
         yInput = Input.GetAxisRaw("Vertical");
+        xInput = Input.GetAxisRaw("Horizontal");
+
+        if(yInput != 0 && xInput != 0)
+        {
+            xInput = xInput * 0.71f;
+            yInput = yInput * 0.71f;
+        }
+
+        if(xInput != 0 || yInput != 0)
+        {
+            isRunning = true;
+            isWalking = false;
+            isIdle = false;
+            movementSpeed = Settings.runningSpeed;
+
+            //Capture player direction for save game 
+            if(xInput < 0)
+            {
+                playerDirection = Direction.left;
+            }
+            else if(xInput > 0)
+            {
+                playerDirection = Direction.right;
+            }
+            else if(yInput < 0)
+            {
+                playerDirection = Direction.down;
+            }
+            else
+            {
+                playerDirection = Direction.up;
+            }
+        }
+        else if(xInput == 0 && yInput == 0)
+        {
+            isRunning = false;
+            isWalking = false;
+            isIdle = true;
+        }
+    }
+
+    private void PlayerWalkInput()
+    {
+        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            isRunning = false;
+            isWalking = true;
+            isIdle = false;
+            movementSpeed = Settings.walkingSpeed;
+        }
+        else
+        {
+            isRunning = true;
+            isWalking = false;
+            isIdle = false;
+            movementSpeed = Settings.runningSpeed;
+        }
     }
 }
