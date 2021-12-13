@@ -3,8 +3,8 @@ using UnityEngine;
 public class Player : SingletonMonobehaviour<Player>
 {
     //Movement Parameters
-    float inputX; 
-    float inputY; 
+    float xInput; 
+    float yInput; 
     bool isWalking; 
     bool isRunning; 
     bool isIdle; 
@@ -82,6 +82,7 @@ public class Player : SingletonMonobehaviour<Player>
 
     private void PlayerMovementInput()
     {
-
+        xInput = Input.GetAxisRaw("Horizontal");
+        yInput = Input.GetAxisRaw("Vertical");
     }
 }

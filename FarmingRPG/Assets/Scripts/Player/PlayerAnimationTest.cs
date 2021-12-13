@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimationTest : MonoBehaviour
 {
-    public float inputX;
-    public float inputY; 
+    public float xInput;
+    public float yInput; 
     public bool isWalking; 
     public bool isRunning; 
     public bool isIdle; 
@@ -34,7 +34,7 @@ public class PlayerAnimationTest : MonoBehaviour
 
     private void Update()
     {
-        EventHandler.CallMovementEvent(inputX, inputY,
+        EventHandler.CallMovementEvent(xInput, yInput,
                 isWalking, isRunning, isIdle, isCarrying,
                 toolEffect,
                 isUsingToolRight, isUsingToolLeft, isUsingToolUp, isUsingToolDown,

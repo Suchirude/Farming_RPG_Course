@@ -841,8 +841,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb463a0981fbc6545b6f9f063229acee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputX: 0
-  inputY: 0
+  xInput: 0
+  yInput: 0
   isWalking: 0
   isRunning: 0
   isIdle: 0
