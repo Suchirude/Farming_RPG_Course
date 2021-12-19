@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class Player : SingletonMonobehaviour<Player>
-{
+{ 
     //Movement Parameters
     float xInput; 
     float yInput; 
