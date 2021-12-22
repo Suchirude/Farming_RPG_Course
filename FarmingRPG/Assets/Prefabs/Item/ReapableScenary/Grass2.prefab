@@ -67,5 +67,13 @@ PrefabInstance:
       propertyPath: _ItemCode
       value: 10019
       objectReference: {fileID: 0}
+    - target: {fileID: 9023395202455462086, guid: 53ad498db91763542b6332c6b4b953fe, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9023395202455462086, guid: 53ad498db91763542b6332c6b4b953fe, type: 3}
+      propertyPath: m_Size.y
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53ad498db91763542b6332c6b4b953fe, type: 3}
