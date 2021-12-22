@@ -24502,6 +24502,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1586527649}
     m_Modifications:
+    - target: {fileID: 2812021592861312461, guid: ff6acb08c69108347b845d5e6d94d115, type: 3}
+      propertyPath: _ItemCode
+      value: 10002
+      objectReference: {fileID: 0}
     - target: {fileID: 6724019349657583428, guid: ff6acb08c69108347b845d5e6d94d115, type: 3}
       propertyPath: m_Name
       value: Corn (2)
