@@ -57,7 +57,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
 
         int itemPosition = FindItemInInventory(inventoryLocation, itemCode);
 
-        if(itemPosition != -1)
+        if (itemPosition != -1)
         {
             AddItemAtPosition(inventoryList, itemCode, itemPosition);
         }
@@ -68,7 +68,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
 
         EventHandler.CallInventoryUpdatedEvent(inventoryLocation, inventoryLists[(int)inventoryLocation]);
     }
-    
+
     private void AddItemAtPosition(List<InventoryItem> inventoryList, int itemCode)
     {
         InventoryItem inventoryItem = new InventoryItem();
@@ -76,8 +76,6 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
         inventoryItem.itemCode = itemCode;
         inventoryItem.itemQuantity = 1;
         inventoryList.Add(inventoryItem);
-
-        DebugPrintInventoryList(inventoryList);
     }
 
     private void AddItemAtPosition(List<InventoryItem> inventoryList, int itemCode, int position)
@@ -88,8 +86,6 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
         inventoryItem.itemQuantity = quantity;
         inventoryItem.itemCode = itemCode;
         inventoryList[position] = inventoryItem;
- 
-        DebugPrintInventoryList(inventoryList);
     }
 
     public int FindItemInInventory(InventoryLocation inventoryLocation, int itemCode)
@@ -98,7 +94,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
 
         for (int i = 0; i < inventoryList.Count; i++)
         {
-            if(inventoryList[i].itemCode == itemCode)
+            if (inventoryList[i].itemCode == itemCode)
             {
                 return i;
             }

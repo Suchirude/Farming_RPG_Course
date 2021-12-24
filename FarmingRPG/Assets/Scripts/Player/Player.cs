@@ -1,35 +1,39 @@
 using UnityEngine;
 
 public class Player : SingletonMonobehaviour<Player>
-{ 
+{
     //Movement Parameters
-    float xInput; 
-    float yInput; 
-    bool isWalking; 
-    bool isRunning; 
-    bool isIdle; 
-    bool isCarrying = false;
-    bool isUsingToolRight; 
-    bool isUsingToolLeft; 
-    bool isUsingToolUp; 
-    bool isUsingToolDown;
-    bool isLiftingToolRight; 
-    bool isLiftingToolLeft; 
-    bool isLiftingToolUp; 
-    bool isLiftingToolDown;
-    bool isPickingRight; 
-    bool isPickingLeft; 
-    bool isPickingUp; 
-    bool isPickingDown;
-    bool isSwingingToolRight; 
-    bool isSwingingToolLeft; 
-    bool isSwingingToolUp; 
-    bool isSwingingToolDown;
-    bool idleUp; 
-    bool idleDown; 
-    bool idleLeft;
-    bool idleRight;
-    ToolEffect toolEffect = ToolEffect.none;
+    private float xInput;
+
+    private float yInput;
+    private bool isWalking;
+    private bool isRunning;
+    private bool isIdle;
+    private bool isCarrying = false;
+    private bool isUsingToolRight;
+    private bool isUsingToolLeft;
+    private bool isUsingToolUp;
+    private bool isUsingToolDown;
+    private bool isLiftingToolRight;
+    private bool isLiftingToolLeft;
+    private bool isLiftingToolUp;
+    private bool isLiftingToolDown;
+    private bool isPickingRight;
+    private bool isPickingLeft;
+    private bool isPickingUp;
+    private bool isPickingDown;
+    private bool isSwingingToolRight;
+    private bool isSwingingToolLeft;
+    private bool isSwingingToolUp;
+    private bool isSwingingToolDown;
+    private bool idleUp;
+    private bool idleDown;
+    private bool idleLeft;
+    private bool idleRight;
+
+    private Camera mainCamera;
+
+    private ToolEffect toolEffect = ToolEffect.none;
 
     private Rigidbody2D rigidBody2D;
 #pragma warning disable 414
@@ -46,6 +50,8 @@ public class Player : SingletonMonobehaviour<Player>
         base.Awake();
 
         rigidBody2D = GetComponent<Rigidbody2D>();
+
+        mainCamera = Camera.main;
     }
 
     private void Update()
@@ -67,7 +73,7 @@ public class Player : SingletonMonobehaviour<Player>
                 isSwingingToolRight, isSwingingToolLeft, isSwingingToolUp, isSwingingToolDown,
                 false, false, false, false);
 
-        #endregion
+        #endregion Player Input
     }
 
     private void FixedUpdate()
@@ -108,29 +114,29 @@ public class Player : SingletonMonobehaviour<Player>
         yInput = Input.GetAxisRaw("Vertical");
         xInput = Input.GetAxisRaw("Horizontal");
 
-        if(yInput != 0 && xInput != 0)
+        if (yInput != 0 && xInput != 0)
         {
             xInput = xInput * 0.71f;
             yInput = yInput * 0.71f;
         }
 
-        if(xInput != 0 || yInput != 0)
+        if (xInput != 0 || yInput != 0)
         {
             isRunning = true;
             isWalking = false;
             isIdle = false;
             movementSpeed = Settings.runningSpeed;
 
-            //Capture player direction for save game 
-            if(xInput < 0)
+            //Capture player direction for save game
+            if (xInput < 0)
             {
                 playerDirection = Direction.left;
             }
-            else if(xInput > 0)
+            else if (xInput > 0)
             {
                 playerDirection = Direction.right;
             }
-            else if(yInput < 0)
+            else if (yInput < 0)
             {
                 playerDirection = Direction.down;
             }
@@ -139,7 +145,7 @@ public class Player : SingletonMonobehaviour<Player>
                 playerDirection = Direction.up;
             }
         }
-        else if(xInput == 0 && yInput == 0)
+        else if (xInput == 0 && yInput == 0)
         {
             isRunning = false;
             isWalking = false;
@@ -149,7 +155,7 @@ public class Player : SingletonMonobehaviour<Player>
 
     private void PlayerWalkInput()
     {
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             isRunning = false;
             isWalking = true;
@@ -163,5 +169,10 @@ public class Player : SingletonMonobehaviour<Player>
             isIdle = false;
             movementSpeed = Settings.runningSpeed;
         }
+    }
+
+    public Vector3 GetViewportPosition()
+    {
+        return mainCamera.WorldToViewportPoint(transform.position);
     }
 }

@@ -23859,6 +23859,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1586527649}
     m_Modifications:
+    - target: {fileID: 4385892122285808765, guid: 4aae647e7f47e414aaedb7c10a0b44ca, type: 3}
+      propertyPath: _ItemCode
+      value: 10007
+      objectReference: {fileID: 0}
     - target: {fileID: 5083188359863265012, guid: 4aae647e7f47e414aaedb7c10a0b44ca, type: 3}
       propertyPath: m_Name
       value: Parsnip
@@ -23869,7 +23873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8331311645327465236, guid: 4aae647e7f47e414aaedb7c10a0b44ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.685904
+      value: -13.41
       objectReference: {fileID: 0}
     - target: {fileID: 8331311645327465236, guid: 4aae647e7f47e414aaedb7c10a0b44ca, type: 3}
       propertyPath: m_LocalPosition.y
